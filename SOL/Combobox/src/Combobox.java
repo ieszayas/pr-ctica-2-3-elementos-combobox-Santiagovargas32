@@ -17,6 +17,7 @@ public class Combobox extends javax.swing.JFrame {
      */
     public Combobox() {
         initComponents();
+        this.setTitle("Agregar elementos Combobox");
         setLocationRelativeTo(null);
     }
 
