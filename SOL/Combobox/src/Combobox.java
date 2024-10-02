@@ -1,11 +1,11 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author Santiago
@@ -17,6 +17,7 @@ public class Combobox extends javax.swing.JFrame {
      */
     public Combobox() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,6 +34,8 @@ public class Combobox extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btnAnadir = new javax.swing.JButton();
+        btnAgregarTodo = new javax.swing.JButton();
+        btnBorrarTodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,6 +63,20 @@ public class Combobox extends javax.swing.JFrame {
             }
         });
 
+        btnAgregarTodo.setText("Añadir Todo");
+        btnAgregarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarTodoActionPerformed(evt);
+            }
+        });
+
+        btnBorrarTodo.setText("Borrar Todo");
+        btnBorrarTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarTodoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,7 +84,11 @@ public class Combobox extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAgregarTodo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBorrarTodo))
                     .addComponent(btnAnadir)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtFieldModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,7 +107,11 @@ public class Combobox extends javax.swing.JFrame {
                     .addComponent(comboBoxModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAnadir)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarTodo)
+                    .addComponent(btnBorrarTodo))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,6 +154,31 @@ public class Combobox extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxModulosActionPerformed
 
+    private void btnBorrarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarTodoActionPerformed
+        // TODO add your handling code here:
+        comboBoxModulos.removeAllItems();
+    }//GEN-LAST:event_btnBorrarTodoActionPerformed
+
+    private void btnAgregarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodoActionPerformed
+        // TODO add your handling code here:
+
+        String[] modulosCurso = {"Programacion de servicios y procesos", "Programacion multimedia", "Acceso a datos", "Desarrollo de Interfaces"};
+
+        // Agregar cada módulo al combobox si no está ya añadido
+        for (String modulo : modulosCurso) {
+            boolean exists = false;
+            for (int i = 0; i < comboBoxModulos.getItemCount(); i++) {
+                if (comboBoxModulos.getItemAt(i).equals(modulo)) {
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                comboBoxModulos.addItem(modulo);
+            }
+        }
+    }//GEN-LAST:event_btnAgregarTodoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -156,6 +206,12 @@ public class Combobox extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        try {
+            // Cambiar el Look and Feel al estilo de Windows
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -165,7 +221,9 @@ public class Combobox extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarTodo;
     private javax.swing.JButton btnAnadir;
+    private javax.swing.JButton btnBorrarTodo;
     private javax.swing.JComboBox<String> comboBoxModulos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
