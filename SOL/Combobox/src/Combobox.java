@@ -149,15 +149,22 @@ public class Combobox extends javax.swing.JFrame {
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         // TODO add your handling code here:
+        String curso = comboBoxCurso.getSelectedItem().toString();
+        String prefijo = curso.equals("Primero") ? "1º " : "2º ";
+
+        // Obtener el texto ingresado en el campo de texto
         String newItem = txtFieldModulo.getText().trim();
 
-// Verificar si el campo de texto está vacío
+        // Verificar si el campo de texto está vacío
         if (newItem.isEmpty()) {
             JOptionPane.showMessageDialog(this, "El campo de texto está vacío", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-// Verificar si el elemento ya está en el combobox
+        // Agregar el prefijo al nuevo ítem
+        newItem = prefijo + newItem;
+
+        // Verificar si el elemento ya está en el combobox
         boolean exists = false;
         for (int i = 0; i < comboBoxModulos.getItemCount(); i++) {
             if (comboBoxModulos.getItemAt(i).equals(newItem)) {
@@ -169,11 +176,9 @@ public class Combobox extends javax.swing.JFrame {
         if (exists) {
             JOptionPane.showMessageDialog(this, "Este elemento ya existe en la lista", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            comboBoxModulos.addItem(newItem);  // Añadir el nuevo elemento al combobox
+            comboBoxModulos.addItem(newItem);  // Añadir el nuevo elemento al combobox con el prefijo
             txtFieldModulo.setText("");  // Limpiar el campo de texto
         }
-
-
     }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void comboBoxModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxModulosActionPerformed
