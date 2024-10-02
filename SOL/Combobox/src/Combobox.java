@@ -37,6 +37,8 @@ public class Combobox extends javax.swing.JFrame {
         btnAnadir = new javax.swing.JButton();
         btnAgregarTodo = new javax.swing.JButton();
         btnBorrarTodo = new javax.swing.JButton();
+        comboBoxCurso = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,41 +80,64 @@ public class Combobox extends javax.swing.JFrame {
             }
         });
 
+        comboBoxCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Primero", "Segundo" }));
+        comboBoxCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCursoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trash.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAgregarTodo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBorrarTodo))
-                    .addComponent(btnAnadir)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtFieldModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
-                        .addComponent(comboBoxModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFieldModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAnadir))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(comboBoxCurso, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(172, 172, 172)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAgregarTodo, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnBorrarTodo, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(comboBoxModulos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(26, 26, 26)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFieldModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboBoxModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnAnadir)
+                .addComponent(comboBoxCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtFieldModulo)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboBoxModulos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregarTodo)
-                    .addComponent(btnBorrarTodo))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addComponent(btnAnadir)
+                    .addComponent(btnAgregarTodo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBorrarTodo)
+                .addGap(62, 62, 62))
         );
 
         pack();
@@ -163,22 +188,57 @@ public class Combobox extends javax.swing.JFrame {
     private void btnAgregarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarTodoActionPerformed
         // TODO add your handling code here:
 
-        String[] modulosCurso = {"Programacion de servicios y procesos", "Programacion multimedia", "Acceso a datos", "Desarrollo de Interfaces"};
+        String curso = comboBoxCurso.getSelectedItem().toString();
 
-        // Agregar cada módulo al combobox si no está ya añadido
+        String[] modulosPrimero = {"Programacion", "Base de datos", "Lenguaje de marcas"};
+        String[] modulosSegundo = {"Programación multimedia", "Acceso a datos", "Desarrollo de Interfaces"};
+
+        String[] modulosCurso = curso.equals("Primero") ? modulosPrimero : modulosSegundo;
+
         for (String modulo : modulosCurso) {
             boolean exists = false;
             for (int i = 0; i < comboBoxModulos.getItemCount(); i++) {
-                if (comboBoxModulos.getItemAt(i).equals(modulo)) {
+                if (comboBoxModulos.getItemAt(i).equals(curso + "º " + modulo)) {
                     exists = true;
                     break;
                 }
             }
             if (!exists) {
-                comboBoxModulos.addItem(modulo);
+                comboBoxModulos.addItem(curso + "º " + modulo);
             }
         }
     }//GEN-LAST:event_btnAgregarTodoActionPerformed
+
+    private void comboBoxCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCursoActionPerformed
+        // TODO add your handling code here:
+
+        String curso = comboBoxCurso.getSelectedItem().toString();
+        String modulo = txtFieldModulo.getText();
+
+        boolean exists = false;
+        for (int i = 0; i < comboBoxModulos.getItemCount(); i++) {
+            if (comboBoxModulos.getItemAt(i).equals(curso + "º " + modulo)) {
+                exists = true;
+                break;
+            }
+        }
+
+// Si no existe ya, agregar al ComboBox
+        if (!exists && !modulo.isEmpty()) {
+            comboBoxModulos.addItem(curso + "º " + modulo);
+        }
+
+
+    }//GEN-LAST:event_comboBoxCursoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        int selectedIndex = comboBoxModulos.getSelectedIndex();
+        if (selectedIndex != -1) {
+            comboBoxModulos.removeItemAt(selectedIndex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,7 +285,9 @@ public class Combobox extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarTodo;
     private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnBorrarTodo;
+    private javax.swing.JComboBox<String> comboBoxCurso;
     private javax.swing.JComboBox<String> comboBoxModulos;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtFieldModulo;
