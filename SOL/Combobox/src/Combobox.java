@@ -38,7 +38,7 @@ public class Combobox extends javax.swing.JFrame {
         btnAgregarTodo = new javax.swing.JButton();
         btnBorrarTodo = new javax.swing.JButton();
         comboBoxCurso = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        BotonBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,10 +87,10 @@ public class Combobox extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trash.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BotonBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/trash.png"))); // NOI18N
+        BotonBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BotonBorrarActionPerformed(evt);
             }
         });
 
@@ -116,7 +116,7 @@ public class Combobox extends javax.swing.JFrame {
                                     .addComponent(btnBorrarTodo, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addComponent(comboBoxModulos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(26, 26, 26)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BotonBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
@@ -129,7 +129,7 @@ public class Combobox extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtFieldModulo)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BotonBorrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comboBoxModulos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -194,6 +194,8 @@ public class Combobox extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String curso = comboBoxCurso.getSelectedItem().toString();
+        String prefijo = curso.equals("Primero") ? "1" : "2";
+      
 
         String[] modulosPrimero = {"Programacion", "Base de datos", "Lenguaje de marcas"};
         String[] modulosSegundo = {"Programación multimedia", "Acceso a datos", "Desarrollo de Interfaces"};
@@ -209,7 +211,7 @@ public class Combobox extends javax.swing.JFrame {
                 }
             }
             if (!exists) {
-                comboBoxModulos.addItem(curso + "º " + modulo);
+                comboBoxModulos.addItem(prefijo + "º " + modulo);
             }
         }
     }//GEN-LAST:event_btnAgregarTodoActionPerformed
@@ -219,31 +221,31 @@ public class Combobox extends javax.swing.JFrame {
 
         String curso = comboBoxCurso.getSelectedItem().toString();
         String modulo = txtFieldModulo.getText();
+        String prefijo = curso.equals("Primero") ? "1" : "2";
 
         boolean exists = false;
         for (int i = 0; i < comboBoxModulos.getItemCount(); i++) {
-            if (comboBoxModulos.getItemAt(i).equals(curso + "º " + modulo)) {
+            if (comboBoxModulos.getItemAt(i).equals(prefijo + "º " + modulo)) {
                 exists = true;
                 break;
             }
         }
 
-// Si no existe ya, agregar al ComboBox
         if (!exists && !modulo.isEmpty()) {
-            comboBoxModulos.addItem(curso + "º " + modulo);
+            comboBoxModulos.addItem(prefijo + "º " + modulo);
         }
 
 
     }//GEN-LAST:event_comboBoxCursoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BotonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBorrarActionPerformed
         // TODO add your handling code here:
 
         int selectedIndex = comboBoxModulos.getSelectedIndex();
         if (selectedIndex != -1) {
             comboBoxModulos.removeItemAt(selectedIndex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BotonBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,12 +289,12 @@ public class Combobox extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonBorrar;
     private javax.swing.JButton btnAgregarTodo;
     private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnBorrarTodo;
     private javax.swing.JComboBox<String> comboBoxCurso;
     private javax.swing.JComboBox<String> comboBoxModulos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField txtFieldModulo;
